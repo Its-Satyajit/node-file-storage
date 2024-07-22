@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Dashboard</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+            th,
+            td {
+                padding: 8px;
+                text-align: left;
+            }
+            button {
+                margin-right: 10px;
+            }
+            #file-stats {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Admin Dashboard</h1>
+
+        <h2>Users</h2>
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Approved</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div id="file-stats"></div>
+
+        <script>
+            const API_URL = 'http://localhost:3000'; // Change to your API base URL
+
+            async function fetchUsers() {
+                const response = await fetch(`${API_URL}/admin/users`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                const users = await response.json();
+                const tableBody = document.querySelector('#users-table tbody');
+                tableBody.innerHTML = '';
+
+                users.forEach((user) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.username}</td>
+          <td>${user.is_approved ? 'Yes' : 'No'}</td>
+          <td>
+            <button onclick="toggleApproval(${user.id}, ${!user.is_approved})">
+              ${user.is_approved ? 'Deny' : 'Approve'}
+            </button>
+          </td>
+        `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            async function toggleApproval(userId, isApproved) {
+                await fetch(`${API_URL}/admin/manage/user/${userId}/access`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    body: JSON.stringify({ isApproved }),
+                });
+                fetchUsers();
+            }
+
+            fetchUsers();
+        </script>
+    </body>
+</html>

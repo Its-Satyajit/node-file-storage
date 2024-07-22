@@ -1,0 +1,40 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  username     String       @unique
+  passwordHash String
+  role         String       @default("user") @db.VarChar(20)
+  createdAt    DateTime     @default(now())
+  isApproved   Boolean      @default(false)
+  files        File[]
+  userUploads  UserUpload[]
+}
+
+model File {
+  id         Int          @id @default(autoincrement())
+  userId     Int
+  filename   String
+  filepath   String
+  filesize   BigInt
+  checksum   String       @unique
+  uploadedAt DateTime     @default(now())
+  user       User         @relation(fields: [userId], references: [id])
+  UserUpload UserUpload[]
+}
+
+model UserUpload {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  fileId     Int
+  uploadDate DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  file       File     @relation(fields: [fileId], references: [id])
+}
