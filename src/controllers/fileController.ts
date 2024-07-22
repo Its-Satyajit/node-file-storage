@@ -1,7 +1,7 @@
 import { createHash } from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
-// import archiver from 'archiver';
+
 import mime from 'mime-types';
 import multer from 'multer';
 
@@ -60,7 +60,7 @@ const upload = multer({
             cb(new Error('Invalid file type'));
         }
     },
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
+    limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 export const uploadFile = [
@@ -97,10 +97,8 @@ export const uploadFile = [
         const userId = (req as any).user.id;
 
         try {
-            // Calculate file checksum
             const checksum = await calculateChecksum(filePath);
 
-            // Check if the file already exists for the user based on checksum
             const existingFile = await prisma.file.findFirst({
                 where: {
                     checksum,
@@ -109,7 +107,6 @@ export const uploadFile = [
             });
 
             if (existingFile) {
-                // Remove the uploaded file if it's a duplicate
                 fs.unlinkSync(filePath);
                 return res.status(200).json({
                     message: 'File already uploaded',
@@ -117,7 +114,6 @@ export const uploadFile = [
                 });
             }
 
-            // If the file doesn't exist, create a new entry
             const newFile = await prisma.file.create({
                 data: {
                     filename,
@@ -174,7 +170,6 @@ export const uploadMultipleFiles = [
                     const { filename, path: filePath, size } = file;
                     const checksum = await calculateChecksum(filePath);
 
-                    // Check if the file already exists for the user based on checksum
                     const existingFile = await prisma.file.findFirst({
                         where: {
                             checksum,
@@ -183,11 +178,10 @@ export const uploadMultipleFiles = [
                     });
 
                     if (existingFile) {
-                        fs.unlinkSync(filePath); // Remove the uploaded file if it's a duplicate
+                        fs.unlinkSync(filePath);
                         return existingFile;
                     }
 
-                    // If the file doesn't exist, create a new entry
                     const newFile = await prisma.file.create({
                         data: {
                             filename,
@@ -227,40 +221,3 @@ export const downloadFileById = [
         }
     },
 ];
-
-// export const downloadMultipleFilesByIds = [
-//     authenticateToken,
-//     async (req: Request, res: Response) => {
-//         const fileIds = req.body.fileIds as number[];
-//         try {
-//             const files = await prisma.file.findMany({
-//                 where: { id: { in: fileIds } },
-//             });
-//             if (!files.length) return res.status(404).send('Files not found.');
-
-//             const zipFilename = 'files.zip';
-//             const output = fs.createWriteStream(zipFilename);
-//             const archive = archiver('zip');
-
-//             output.on('close', () => {
-//                 res.download(zipFilename, () => {
-//                     fs.unlinkSync(zipFilename);
-//                 });
-//             });
-
-//             archive.on('error', (err) => {
-//                 throw err;
-//             });
-
-//             archive.pipe(output);
-//             files.forEach((file) => {
-//                 archive.file(file.filepath, { name: file.filename });
-//             });
-
-//             await archive.finalize();
-//         } catch (error) {
-//             console.error(error);
-//             res.status(500).send('Error retrieving files');
-//         }
-//     },
-// ];

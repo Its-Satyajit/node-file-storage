@@ -12,6 +12,6 @@ export const config = {
         database: process.env.DB_DATABASE as string,
     },
     jwt: {
-        secret: (process.env.JWT_SECRET as string) || 'default_secret_key', // Use environment variable
+        secret: (process.env.JWT_SECRET as string) || 'default_secret_key',
     },
 };

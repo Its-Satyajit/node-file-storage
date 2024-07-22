@@ -7,5 +7,5 @@ const router = express.Router();
 router.post('/upload', authenticateToken, uploadFile);
 router.post('/uploadMultiple', authenticateToken, uploadMultipleFiles);
 router.get('/download/:id', authenticateToken, downloadFileById);
-// router.post('/downloadMultiple', authenticateToken, downloadMultipleFilesByIds);
+
 export default router;

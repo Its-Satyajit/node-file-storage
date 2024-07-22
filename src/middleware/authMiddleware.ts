@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { UserRole } from '../types/roles';
+
 import { config } from '../config/config';
+import { UserRole } from '../types/roles';
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
@@ -11,7 +12,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
     jwt.verify(token, config.jwt.secret, (err: any, user: any) => {
         if (err) return res.sendStatus(403);
-        req.user = user; // Ensure user is of the correct type
+        req.user = user;
         next();
     });
 };

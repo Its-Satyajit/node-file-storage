@@ -1,4 +1,4 @@
-import { UserRole } from './roles'; // Adjust the path according to your project structure
+import { UserRole } from './roles';
 
 declare global {
     namespace Express {
