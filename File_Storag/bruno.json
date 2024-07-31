@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "File_Storag",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

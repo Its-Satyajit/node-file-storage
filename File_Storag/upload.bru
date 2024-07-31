@@ -1,0 +1,26 @@
+meta {
+  name: upload
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3030/files/upload
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInRs5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ1c2VyIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjE4OTY0NjYsImV4cCI6MTcyMTkwMDA2Nn0.g_HCxnR4izGaRVcJ5hRLw1mLxQhg_5JInIxXg6638y0
+}
+
+body:json {
+  {
+  "username":"user",
+  "password": "123456"
+  }
+}
+
+body:multipart-form {
+  file: @file(/mnt/sda5/77627641.jpg)
+}
