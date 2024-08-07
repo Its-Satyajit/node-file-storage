@@ -25,12 +25,15 @@
         "express-rate-limit": "^7.3.1",
         "jsonwebtoken": "^9.0.2",
         "mime-types": "^2.1.35",
+        "morgan": "^1.10.0",
         "multer": "1.4.5-lts.1",
         "postgres": "^3.4.4",
         "prisma": "^5.17.0",
         "ts-node-dev": "^2.0.0"
     },
     "devDependencies": {
+        "@types/morgan": "^1.9.9",
+        "glob": "^11.0.0",
         "nodemon": "^3.1.4",
         "ts-node": "^10.9.2",
         "typescript": "^5.5.3"

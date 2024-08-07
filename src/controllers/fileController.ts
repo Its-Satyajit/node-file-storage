@@ -1,7 +1,6 @@
 import { createHash } from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
-
 import mime from 'mime-types';
 import multer from 'multer';
 
@@ -60,39 +59,34 @@ const upload = multer({
             cb(new Error('Invalid file type'));
         }
     },
-    limits: { fileSize: 5 * 1024 * 1024 },
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB limit
 });
 
 export const uploadFile = [
     authenticateToken,
     async (req: Request, res: Response, next: NextFunction) => {
         const userId = (req as any).user.id;
+
         try {
             const user = await prisma.user.findUnique({
                 where: { id: userId },
                 select: { isApproved: true },
             });
+
             if (!user || !user.isApproved) {
                 return res.status(403).send('Upload permission denied. Please contact admin.');
             }
+
             next();
         } catch (error) {
             console.error(error);
             res.status(500).send('Error checking user approval');
         }
     },
-    (req: Request, res: Response, next: NextFunction) => {
-        upload.single('file')(req, res, (err: any) => {
-            if (err instanceof multer.MulterError) {
-                return res.status(400).send(`Multer error: ${err.message}`);
-            } else if (err) {
-                return res.status(400).send(`Upload error: ${err.message}`);
-            }
-            next();
-        });
-    },
+    upload.single('file'), // Adjust 'file' to match the key used in FormData
     async (req: Request, res: Response) => {
         if (!req.file) return res.status(400).send('No file uploaded.');
+
         const { filename, path: filePath, size } = req.file;
         const userId = (req as any).user.id;
 
@@ -123,6 +117,7 @@ export const uploadFile = [
                     user: { connect: { id: userId } },
                 },
             });
+
             res.status(200).json({ message: 'File uploaded successfully', fileId: newFile.id });
         } catch (error) {
             console.error(error);
@@ -203,8 +198,8 @@ export const uploadMultipleFiles = [
         }
     },
 ];
+
 export const downloadFileById = [
-    authenticateToken,
     async (req: Request, res: Response) => {
         const fileId = parseInt(req.params.id, 10);
         try {

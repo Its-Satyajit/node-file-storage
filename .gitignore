@@ -4,3 +4,4 @@ node_modules
 
 dist
 uploads/*
+generate_docs.py
