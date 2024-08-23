@@ -25,7 +25,7 @@ importers:
         version: 2.1.4
       '@types/multer':
         specifier: ^1.4.11
-        version: 1.4.11
+        version: 1.4.12
       '@types/node':
         specifier: ^20.14.11
         version: 20.16.0
@@ -173,8 +173,8 @@ packages:
   '@types/morgan@1.9.9':
     resolution: {integrity: sha512-iRYSDKVaC6FkGSpEVVIvrRGw0DfJMiQzIn3qr2G5B3C//AWkulhXgaBd7tS9/J79GWSYMTHGs7PfI5b3Y8m+RQ==}
 
-  '@types/multer@1.4.11':
-    resolution: {integrity: sha512-svK240gr6LVWvv3YGyhLlA+6LRRWA4mnGIU7RcNmgjBYFl6665wcXrRfxGp5tEPVHUNm5FMcmq7too9bxCwX/w==}
+  '@types/multer@1.4.12':
+    resolution: {integrity: sha512-pQ2hoqvXiJt2FP9WQVLPRO+AmiIm/ZYkavPlIQnx282u4ZrVdztx0pkh3jjpQt0Kz+YI0YhSG264y08UJKoUQg==}
 
   '@types/node@20.16.0':
     resolution: {integrity: sha512-vDxceJcoZhIVh67S568bm1UGZO0DX0hpplJZxzeXMKwIPLn190ec5RRxQ69BKhX44SUGIxxgMdDY557lGLKprQ==}
@@ -1196,7 +1196,7 @@ snapshots:
     dependencies:
       '@types/node': 20.16.0
 
-  '@types/multer@1.4.11':
+  '@types/multer@1.4.12':
     dependencies:
       '@types/express': 4.17.21
 
