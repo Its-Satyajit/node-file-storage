@@ -61,7 +61,7 @@ importers:
         version: 5.18.0
       ts-node-dev:
         specifier: ^2.0.0
-        version: 2.0.0(@types/node@20.16.0)(typescript@5.5.4)
+        version: 2.0.0(@types/node@20.16.0)(typescript@5.6.2)
     devDependencies:
       '@types/morgan':
         specifier: ^1.9.9
@@ -74,10 +74,10 @@ importers:
         version: 3.1.4
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.16.0)(typescript@5.5.4)
+        version: 10.9.2(@types/node@20.16.0)(typescript@5.6.2)
       typescript:
         specifier: ^5.5.3
-        version: 5.5.4
+        version: 5.6.2
 
 packages:
 
@@ -1015,8 +1015,8 @@ packages:
   typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
-  typescript@5.5.4:
-    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+  typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2024,7 +2024,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  ts-node-dev@2.0.0(@types/node@20.16.0)(typescript@5.5.4):
+  ts-node-dev@2.0.0(@types/node@20.16.0)(typescript@5.6.2):
     dependencies:
       chokidar: 3.6.0
       dynamic-dedupe: 0.3.0
@@ -2034,15 +2034,15 @@ snapshots:
       rimraf: 2.7.1
       source-map-support: 0.5.21
       tree-kill: 1.2.2
-      ts-node: 10.9.2(@types/node@20.16.0)(typescript@5.5.4)
+      ts-node: 10.9.2(@types/node@20.16.0)(typescript@5.6.2)
       tsconfig: 7.0.0
-      typescript: 5.5.4
+      typescript: 5.6.2
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
 
-  ts-node@10.9.2(@types/node@20.16.0)(typescript@5.5.4):
+  ts-node@10.9.2(@types/node@20.16.0)(typescript@5.6.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -2056,7 +2056,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.5.4
+      typescript: 5.6.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
@@ -2074,7 +2074,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typescript@5.5.4: {}
+  typescript@5.6.2: {}
 
   undefsafe@2.0.5: {}
 
